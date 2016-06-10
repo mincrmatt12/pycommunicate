@@ -11,6 +11,9 @@ class Controller:
         self.route_data = {}
         self.d = {}  # The data object, maybe replace this with some proxy thingy later
 
+    def render_page(self):
+        return self.views[self.view_index].render()
+
 
 class ControllerFactory:
     def __init__(self):

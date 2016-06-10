@@ -7,7 +7,7 @@ class UserTracker:
     """
     def __init__(self, app):
         self.user_refs = []
-        self.users = []
+        self.users = {}
         self.app = app
 
     def connect_user(self):
@@ -16,11 +16,11 @@ class UserTracker:
             id_ = random_alphanumeric_string(50)
         self.user_refs.append(id_)
         user = ConnectedUser(id_, self.app)
-        self.users.append(user)
+        self.users[id_] = user
         return user
 
     def disconnect_user(self, user):
-        self.users.remove(user)
+        del self.users[user.id_]
         self.user_refs.remove(user.id_)
 
 
