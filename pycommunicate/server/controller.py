@@ -10,10 +10,16 @@ class Controller:
         self.app = None
         self.route_data = {}
         self.d = {}  # The data object, maybe replace this with some proxy thingy later
+        self.user = None
 
     def render_page(self):
         return self.views[self.view_index].render()
 
+    def current_view(self):
+        return self.views[self.view_index]
+
+    def change_view(self, new_view_index):
+        pass
 
 class ControllerFactory:
     def __init__(self):
@@ -25,9 +31,11 @@ class ControllerFactory:
         Adds a view type to the list.
         """
         self.view_types += [view]
+        return self
 
     def set_default_view(self, view):
         self.default_view_index = self.view_types.index(view)
+        return self
 
     def __call__(self, *args, **kwargs):
         controller = Controller(self)

@@ -17,15 +17,20 @@ class CommunicateApp:
         self.flask = Flask(__name__)
         self.socketio = SocketIOContainer(self.flask)
         self.user_tracker = UserTracker(self)
+        self.flask.secret_key = "secret!"  # Prevents server from crashing without calling set_secret_key
 
         self.green_pool = GreenPool(self.maximum_handler_threads)
 
+    def set_secret_key(self, key):
+        self.flask.secret_key = key
+
     def _dispatch(self, route, **kwargs):
         user = None
+
         if 'shared_id' in session:
             if session['shared_id'] in self.user_tracker.user_refs:
                 user = self.user_tracker.users[session['shared_id']]
-        elif user is None:
+        if user is None:
             user = self.user_tracker.connect_user()
             session['shared_id'] = user.id_
 
