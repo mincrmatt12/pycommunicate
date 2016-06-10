@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, session
 
+from pycommunicate.server.app.usertrack import UserTracker
 from .socketio import SocketIOContainer
 from eventlet.greenpool import GreenPool
 
@@ -15,11 +16,15 @@ class CommunicateApp:
 
         self.flask = Flask(__name__)
         self.socketio = SocketIOContainer(self.flask)
+        self.user_tracker = UserTracker(self)
 
         self.green_pool = GreenPool(self.maximum_handler_threads)
 
     def _dispatch(self, route, **kwargs):
-        pass
+        controller = self.routed_controllers[route]
+        if 'shared_id' in session:
+            if session['shared_id'] in self.user_tracker.user_refs:
+                user = self.user_tracker.users
 
     def _create_flask_handler(self, route):
         @self.flask.route(route)

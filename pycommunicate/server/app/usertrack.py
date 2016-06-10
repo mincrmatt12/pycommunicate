@@ -31,6 +31,8 @@ class ConnectedUser:
         self.active_controller = None
         self.active_controller_type = None
 
-    def open_page(self, page):
+    def open_page(self, page, **kwargs):
         self.active_controller_type = self.app.routed_controllers[page]
         self.active_controller = self.active_controller_type()
+        self.active_controller.app = self.app
+        self.active_controller.route_data = kwargs
