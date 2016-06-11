@@ -17,13 +17,14 @@ You can attach events to elements, change properties, and much more!
 
 Want to get started? Well you're in the right place, because this *is* the documentation! :)
 
-Quick example
--------------
+Example
+-------
+This is code from examples/hello.py found in the docs folder.
+
 .. literalinclude:: examples/hello.py
    :language: python
-   :file:
-   :caption:
    :linenos:
+
 
 .. toctree::
    :caption: Tutorial
