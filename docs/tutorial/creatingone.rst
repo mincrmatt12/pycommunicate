@@ -21,16 +21,16 @@ be one file and one folder: main.py and templates. We'll get back to templates i
 main.py.
 
 Making our page
-~~~~~~~~~~~~~~~
+---------------
 First of all, let's create a simple page for our app in html. Some of it might not make sense right now, but just roll
 with it. For now just pu this into templates/home.html:
 
-.. literalinclude:: examples/tutorial/home.html
+.. literalinclude:: examples/tutorial/templates/home.html
    :language: html
    :linenos:
 
 Serving up the page statically
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 First of all, we will need a CommunicateApp instance before we even start writing anything, so lets add that now to
 main.py, and while we're at it, lets import everything we'll need:
