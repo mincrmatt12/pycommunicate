@@ -97,6 +97,6 @@ We're almost done, now, and all we have to add is the secret key and the call to
 And that's it! You should be able to simply run it and see a static, lifeless page. On the next page, we'll get to adding
 some event handlers. Here's the full source right now for copying:
 
-.. literalinclude:: /examples/tutorial/tutorial1.py
+.. literalinclude:: tutorial1.py
    :language: python
    :linenos:

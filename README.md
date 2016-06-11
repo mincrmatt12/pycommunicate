@@ -10,7 +10,7 @@ support for changing html from one page to another without swapping the page, an
 
 ## examples plz
 
-Look in the docs/examples directory. Right now it's a little barren, but that _will_ change
+Look in the docs/examples directory. The tutorial one can be created by following the tutorial on the docs
 
 ## documentation?
 

@@ -32,4 +32,5 @@ This is code from examples/hello.py found in the docs folder.
    tutorial/upandrunning
    tutorial/yourfirst
    tutorial/creatingone
+   tutorial/sprinkling
 
