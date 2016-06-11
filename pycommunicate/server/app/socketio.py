@@ -39,7 +39,7 @@ class SocketIOContainer:
             self.awaited_responses[tag].put(response_data)
 
     def send(self, event_id, room, args, tag=""):
-        thing = (room, event_id, [args, tag] if tag is not "" else [args])
+        thing = (room, event_id, list(args) + [tag] if tag is not "" else [args])
         if tag != "":
             self.awaited_responses[tag] = eventlet.queue.Queue()
         self.send_queue.put(thing)
@@ -55,8 +55,7 @@ class SocketIOContainer:
     def send_daemon(self):
         while True:
             data = self.send_queue.get()
-
-            flask_socketio.emit(data[1], *data[2], room=data[0])
+            self.socketio.emit(data[1], data[2], room=data[0])
 
     def start_handlers(self, pool):
         pool.spawn_n(self.send_daemon)

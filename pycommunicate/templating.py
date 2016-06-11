@@ -2,9 +2,8 @@ import jinja2
 
 
 class Templater:
-    def __init__(self, controller):
-        self.app = controller.app
-        self.controller = controller
+    def __init__(self, controller_or_app):
+        self.app = controller_or_app.app if hasattr(controller_or_app, 'app') else controller_or_app
 
         self.env = jinja2.Environment(
             loader=jinja2.ChoiceLoader(

@@ -8,7 +8,10 @@ class HelloView(View):
         return self.controller.templater.render('hello2.html')
 
     def load(self):
-        print "connection established"
+        print "requesting whether p exists...",
+        print self.html_wrapper.element_exists('p')
+        print "requesting whether li exists...",
+        print self.html_wrapper.element_exists('li')
 
 
 app = CommunicateApp()

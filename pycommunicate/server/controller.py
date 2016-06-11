@@ -1,3 +1,4 @@
+from pycommunicate.proxies.dom.html import HTMLWrapper
 from pycommunicate.proxies.socket import SocketInterface
 
 
@@ -8,7 +9,6 @@ class Controller:
     These are populated automagically, and should not be created externally
     """
     def __init__(self, factory):
-        self.views = [view(self) for view in factory.view_types]
         self.view_index = factory.default_view_index
         self.app = None
         self.route_data = {}
@@ -16,7 +16,10 @@ class Controller:
         self.user = None
         self.route = factory.route
         self.socket_interface = SocketInterface(self)
+        self.html_wrapper = HTMLWrapper(self)
         self.templater = None
+
+        self.views = [view(self) for view in factory.view_types]
 
     def render_page(self):
         return self.views[self.view_index].render()
@@ -25,7 +28,9 @@ class Controller:
         return self.views[self.view_index]
 
     def change_view(self, new_view_index):
-        pass
+        self.view_index = new_view_index
+        self.socket_interface.send('view.swap', self.render_page())
+        self.user.socket_connected = False
 
     def trigger_connect(self):
         self.current_view().load()
