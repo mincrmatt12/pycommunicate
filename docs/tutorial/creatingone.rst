@@ -25,6 +25,7 @@ Serving up a static page
 
 First of all, we will need a CommunicateApp instance before we even start writing anything, so lets add that now to
 main.py:
+
 .. code-block:: python
    :linenos:
    :emphasize-lines: 3
