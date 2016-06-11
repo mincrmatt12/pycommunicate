@@ -25,7 +25,7 @@ Making our page
 First of all, let's create a simple page for our app in html. Some of it might not make sense right now, but just roll
 with it. For now just pu this into templates/home.html:
 
-.. literalinclude:: examples/tutorial/templates/home.html
+.. literalinclude:: /examples/tutorial/templates/home.html
    :language: html
    :linenos:
 
@@ -97,6 +97,6 @@ We're almost done, now, and all we have to add is the secret key and the call to
 And that's it! You should be able to simply run it and see a static, lifeless page. On the next page, we'll get to adding
 some event handlers. Here's the full source right now for copying:
 
-.. literalinclude:: examples/tutorial/tutorial1.py
+.. literalinclude:: /examples/tutorial/tutorial1.py
    :language: python
    :linenos:
