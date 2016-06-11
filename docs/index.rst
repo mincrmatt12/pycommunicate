@@ -8,7 +8,7 @@ Getting started
 .. toctree::
    :maxdepth: 2
 
-   index
+   self
 
 .. contents:: Contents
 
