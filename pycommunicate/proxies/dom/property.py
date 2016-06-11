@@ -10,3 +10,11 @@ class SimpleElementProperty(object):
     def set(self, value):
         self.element.dom.controller.socket_interface.send('element.property.set', self.element.selector,
                                                           self.name, value)
+
+
+class MultiElementProperty(object):
+    def __init__(self, basename, element):
+        self.element = element
+        self.basename = basename
+
+

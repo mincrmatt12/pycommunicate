@@ -28,7 +28,8 @@ to hold many views, which actually deal with the page. Controller do, however, c
 is one of many sessions in pycommunicate. This one remains across any given request.
 
 Controllers are not created by you, though. They are created by pycommunicate itself, you only define one. For this
-you use ControllerFactory.
+you use ControllerFactory. You can subclass both Controller and ControllerFactory to create your own custom behaviour,
+however.
 
 View
 ~~~~

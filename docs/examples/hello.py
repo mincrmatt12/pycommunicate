@@ -10,9 +10,9 @@ none of the apis will work nor will load ever be called. Again, this is a very s
 WARNING: DO NOT ACTUALLY SHOW THE USER ID TO A USER!!
 """
 
-from pycommunicate.server.bases.views import View
 from pycommunicate.server.app.communicate import CommunicateApp
-from pycommunicate.server.controller import ControllerFactory
+from pycommunicate.server.bases.controller import ControllerFactory
+from pycommunicate.server.bases.views import View
 
 
 class HelloView(View):

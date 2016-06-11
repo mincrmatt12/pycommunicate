@@ -1,6 +1,6 @@
-from pycommunicate.server.bases.views import View
 from pycommunicate.server.app.communicate import CommunicateApp
-from pycommunicate.server.controller import ControllerFactory
+from pycommunicate.server.bases.controller import ControllerFactory
+from pycommunicate.server.bases.views import View
 
 
 class HelloView(View):

@@ -75,6 +75,59 @@ window.pycommunicate = (function () {
                 
                 addEventListener(document.querySelector(selector), name, handler);
             });
+            socket.on('element.property.complex', function (dat) {
+                var selector = dat[0];
+                var base = dat[1];
+                var other = dat[2];
+                var return_tag = dat[3];
+
+                var result = document.querySelector(selector)[base][other];
+                socket.emit("response", result, return_tag);
+            });
+            socket.on('element.property.complex.set', function (dat) {
+                var selector = dat[0];
+                var base = dat[1];
+                var other = dat[2];
+                var value = dat[3];
+
+                document.querySelector(selector)[base][other] = value;
+            });
+            socket.on('element.add.after', function (dat) {
+                var selector = dat[0];
+                var target_type = dat[1];
+                var target_id = dat[2];
+                var ack_id = dat[3];
+
+                var ele = document.createElement(target_type);
+                ele.id = target_id;
+               
+                var reference = document.querySelector(selector);
+                reference.parentNode.insertBefore(ele, reference.nextSibling);
+                
+                socket.emit("response", true, ack_id);
+            });
+            socket.on('element.add.inside', function (dat) {
+                var selector = dat[0];
+                var target_type = dat[1];
+                var target_id = dat[2];
+                var ack_id = dat[3];
+                
+                var ele = document.createElement(target_type);
+                ele.id = target_id;
+               
+                var reference = document.querySelector(selector);
+                reference.appendChild(ele);
+                
+                socket.emit("response", true, ack_id);
+            });
+            socket.on('element.remove', function (dat) {
+                var selector = dat[0];
+
+                console.log(dat);
+
+                var old = document.querySelector(selector);
+                old.parentNode.removeChild(old);
+            });
         },
 
         _connect: function () {
