@@ -25,7 +25,6 @@ This is code from examples/hello.py found in the docs folder.
    :language: python
    :linenos:
 
-i
 .. toctree::
    :caption: Tutorial
    :maxdepth: 2
