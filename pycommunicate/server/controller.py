@@ -1,3 +1,6 @@
+from pycommunicate.proxies.socket import SocketInterface
+
+
 class Controller:
     """
     Real controller instance, created by a ControllerFactory
@@ -11,6 +14,9 @@ class Controller:
         self.route_data = {}
         self.d = {}  # The data object, maybe replace this with some proxy thingy later
         self.user = None
+        self.route = factory.route
+        self.socket_interface = SocketInterface(self)
+        self.templater = None
 
     def render_page(self):
         return self.views[self.view_index].render()
@@ -21,10 +27,15 @@ class Controller:
     def change_view(self, new_view_index):
         pass
 
+    def trigger_connect(self):
+        self.current_view().load()
+
+
 class ControllerFactory:
     def __init__(self):
         self.view_types = []
         self.default_view_index = -1
+        self.route = ""
 
     def add_view(self, view):
         """
