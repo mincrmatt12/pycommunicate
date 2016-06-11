@@ -5,18 +5,25 @@
 
 Welcome to pycommunicate's documentation!
 =========================================
-
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
+What is pycommunicate?
+----------------------
+pycommunicate is a python web-server library designed to make server-heavy webapps easy!
 
+In other words, this library is similar to others (in fact it wraps flask to work), but with one very amazing difference:
+**you can modify the dom from the server**
 
-Indices and tables
-==================
+You can attach events to elements, change properties, and much more!
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Want to get started? Well you're in the right place, because this *is* the documentation! :)
+
+Quick example
+-------------
+
+Here is the contents of examples/hello.py:
+.. literalinclude:: examples/hello.py
+   :language: python
+   :linenos:
 
