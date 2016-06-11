@@ -19,6 +19,8 @@ class Controller:
         self.html_wrapper = HTMLWrapper(self)
         self.templater = None
 
+        self.events = {}
+
         self.views = [view(self) for view in factory.view_types]
 
     def render_page(self):
@@ -34,6 +36,22 @@ class Controller:
 
     def trigger_connect(self):
         self.current_view().load()
+
+    def teardown(self):
+        for event_id in self.events:
+            del self.app.socketio.event_dispatchers[event_id]
+        for view in self.views:
+            view.teardown()
+
+    def dispatch_event(self, event_id):
+        self.events[event_id]()
+
+    def handle_event(self, event_id, handler):
+        def dispatcher():
+            self.dispatch_event(event_id)
+
+        self.events[event_id] = handler
+        self.app.socketio.event_dispatchers[event_id] = dispatcher
 
 
 class ControllerFactory:

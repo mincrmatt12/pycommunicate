@@ -19,7 +19,7 @@ class View2(View):
         return self.controller.templater.render('view2.html')
 
     def load(self):
-        print 'landed!'
+        print 'landed'
 
 
 app = CommunicateApp()

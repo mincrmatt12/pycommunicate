@@ -17,6 +17,8 @@ class SocketIOContainer:
 
         self.awaited_responses = {}
 
+        self.event_dispatchers = {}
+
         self.create_handlers()
 
     def on_connect(self, request_id):
@@ -34,12 +36,20 @@ class SocketIOContainer:
         def connect(request_id):
             self.on_connect(request_id)
 
+        @self.socketio.on("teardown")
+        def teardown(request_id):
+            self.on_teardown(request_id)
+
         @self.socketio.on("response")
         def response(response_data, tag):
             self.awaited_responses[tag].put(response_data)
 
+        @self.socketio.on("event")
+        def event(event_id):
+            self.app.green_pool.spawn_n(self.event_dispatchers[event_id])
+
     def send(self, event_id, room, args, tag=""):
-        thing = (room, event_id, list(args) + [tag] if tag is not "" else [args])
+        thing = (room, event_id, list(args) + [tag] if tag is not "" else list(args))
         if tag != "":
             self.awaited_responses[tag] = eventlet.queue.Queue()
         self.send_queue.put(thing)
@@ -59,3 +69,8 @@ class SocketIOContainer:
 
     def start_handlers(self, pool):
         pool.spawn_n(self.send_daemon)
+
+    def on_teardown(self, request_id):
+        user = self.app.user_tracker.users[self.app.user_tracker.requests[request_id]]
+
+        user.socket_connected = False

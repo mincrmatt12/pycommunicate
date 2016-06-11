@@ -45,6 +45,8 @@ class ConnectedUser:
     def open_page(self, page, kwargs):
         self.request_id = random_alphanumeric_string(60)
         self.parent.requests[self.request_id] = self.id_
+        if self.active_controller is not None:
+            self.active_controller.teardown()
         self.active_controller_type = self.app.routed_controllers[page]
         self.active_controller = self.active_controller_type()
         self.active_controller.app = self.app

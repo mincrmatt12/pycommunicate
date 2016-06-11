@@ -51,10 +51,38 @@ window.pycommunicate = (function () {
                 document.write(dat);
                 document.close();
             });
+            socket.on('element.property', function (dat) {
+                var selector = dat[0];
+                var name = dat[1];
+                var return_tag = dat[2];
+                
+                var result = document.querySelector(selector)[name];
+                socket.emit("response", result, return_tag)
+            });
+            socket.on('element.property.set', function (dat) {
+                var selector = dat[0];
+                var name = dat[1];
+                document.querySelector(selector)[name] = dat[2];
+            });
+            socket.on('element.addevent', function (dat) {
+                var selector = dat[0];
+                var name = dat[1];
+                var event_id = dat[2];
+                
+                function handler() {
+                    socket.emit('event', event_id);
+                }
+                
+                addEventListener(document.querySelector(selector), name, handler);
+            });
         },
 
         _connect: function () {
             this._socket.emit("setup", requestID);
+        },
+
+        _teardown: function () {
+            this._socket.emit("teardown", requestID);
         }
     };
 
@@ -62,3 +90,5 @@ window.pycommunicate = (function () {
 }());
 
 addEventListener(document, "ready", pycommunicate._ready());
+
+addEventListener(document, "beforeunload", pycommunicate._teardown());
