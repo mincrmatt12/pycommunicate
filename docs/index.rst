@@ -23,6 +23,7 @@ Quick example
 -------------
 
 Here is the contents of examples/hello.py:
+
 .. literalinclude:: examples/hello.py
    :language: python
    :linenos:
