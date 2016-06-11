@@ -23,7 +23,7 @@ main.py.
 Making our page
 ---------------
 First of all, let's create a simple page for our app in html. Some of it might not make sense right now, but just roll
-with it. For now just pu this into templates/home.html:
+with it. For now just put this into templates/home.html:
 
 .. literalinclude:: /examples/tutorial/templates/home.html
    :language: html
@@ -68,7 +68,7 @@ Next, we have the render() method. This is called to get the base page to serve 
 thing you actually have to override. Views have references to their parent controllers, which have Templaters. A
 :py:class:`Templater` will render a template, the default location is templates/, but this can be changed. See :py:meth:`CommunicateApp.__init__` for how to change it.
 
-.. tip::
+.. note::
    The templater, and all of pycommunicate use jinja2, a templating engine. For more info on what we provide in jinja2, and
    how to use the templater, go look at its page.
 

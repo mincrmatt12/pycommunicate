@@ -10,4 +10,8 @@ support for changing html from one page to another without swapping the page, an
 
 ## examples plz
 
-Look in the examples directory. Right now it's a little barren, but that _will_ change
+Look in the docs/examples directory. Right now it's a little barren, but that _will_ change
+
+## documentation?
+
+[pycommunicate docs on readthedocs.io](http://pycommunicate.readthedocs.io) 
