@@ -8,6 +8,8 @@ Getting started
 .. toctree::
    :maxdepth: 2
 
+   index
+
 .. contents:: Contents
 
 What is pycommunicate?
