@@ -25,9 +25,9 @@ Alright, so now we have a variable called ``todo`` that manages... todos!
 Showing the current todos
 -------------------------
 
-At the heart of server-side DOM manipulation in pycommunicate is :py:class:HTMLWrapper.
-For all of the methods it supports, go look at it, but the one we will be using is :py:meth:element_by_selector. This method
-will return a :py:class:ElementWrapper tracked to follow the selector given. This can then be used to modify the DOM.
+At the heart of server-side DOM manipulation in pycommunicate is :py:class:`HTMLWrapper`.
+For all of the methods it supports, go look at it, but the one we will be using is :py:meth:`element_by_selector`. This method
+will return a :py:class:`ElementWrapper` tracked to follow the selector given. This can then be used to modify the DOM.
 
 Add a load() method
 ~~~~~~~~~~~~~~~~~~~
@@ -82,7 +82,7 @@ Alright, lets do this bit by bit:
    todo_div = self.html_wrapper.element_by_selector("#todo")
 
 The ``todo_div = `` is probably self-explanatory to all python programmers, so let's explain that call. As I said earlier
-the :py:meth:element_by_selector method returns a :py:class:ElementWrapper. In this case, it is tracking the first thing with
+the :py:meth:`element_by_selector` method returns a :py:class:`ElementWrapper`. In this case, it is tracking the first thing with
 an id of `todo`. In our html file, that points to the `<div>`. So this call will set todo_div equal to something that represents...
 the todo div!
 
@@ -93,5 +93,5 @@ the todo div!
    loading_message = self.html_wrapper.element_by_selector("#loadingBar")
    loading_message.delete()
 
-The first line does similar things to the example above, so lets explain the second line. It calls `loading_message`'s :py:meth:delete method,
+The first line does similar things to the example above, so lets explain the second line. It calls `loading_message`'s :py:meth:`delete` method,
 which deletes the element. This effectively clears the "Loading..." message from the page.
