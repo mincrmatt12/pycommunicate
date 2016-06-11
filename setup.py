@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def get_markdown():
@@ -30,7 +30,7 @@ setup(
     author='mincrmatt12',
     author_email='nope@nope.com',
     license='MIT',
-    packages=['pycommunicate'],
+    packages=find_packages(),
     zip_safe=False,
     install_requires=requires,
     classifiers=[
