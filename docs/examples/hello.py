@@ -1,7 +1,8 @@
 """
 hello.py:
 
-Using the pycommunicate framework to serve a static webpage, as well as show internal id numbers. It also shows off th
+Using the pycommunicate framework to serve a static webpage, as well as show internal id numbers. It also shows off the
+session variables.
 
 Because the returned value does not load the js libs, the socketio connection is not started. This means that
 none of the apis will work nor will load ever be called. Again, this is a very simple demo.
