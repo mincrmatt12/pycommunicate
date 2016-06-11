@@ -3,15 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Getting started
-===============
-.. toctree::
-   :hidden:
-   :maxdepth: 3
-
-   self
-
-.. contents:: Contents
+Welcome to pycommunicate
+========================
 
 What is pycommunicate?
 ----------------------
@@ -26,10 +19,15 @@ Want to get started? Well you're in the right place, because this *is* the docum
 
 Quick example
 -------------
-
-Here is the contents of examples/hello.py:
-
 .. literalinclude:: examples/hello.py
    :language: python
+   :file:
+   :caption:
    :linenos:
+
+.. toctree::
+   :caption: Tutorial
+   :maxdepth: 2
+
+   tutorial/upandrunning
 
