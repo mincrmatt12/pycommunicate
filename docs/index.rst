@@ -30,4 +30,5 @@ This is code from examples/hello.py found in the docs folder.
    :maxdepth: 2
 
    tutorial/upandrunning
+   tutorial/yourfirst
 
