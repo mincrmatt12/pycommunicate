@@ -10,7 +10,6 @@ requires = '''click
 eventlet
 Flask
 Flask-SocketIO
-greenlet
 itsdangerous
 Jinja2
 MarkupSafe
