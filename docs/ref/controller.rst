@@ -10,7 +10,7 @@ Controller and ControllerFactory
 
    .. py:method:: add_view(view)
 
-      Adds a py:class:`View` to the controller factory's view list.
+      Adds a py:class:`~pycommunicate.server.bases.views.View` to the controller factory's view list.
 
       .. warning::
 
@@ -33,7 +33,7 @@ Controller and ControllerFactory
       Sets the before_connect function. This is called as soon as a request comes in for the page, and should be
       used to do something before a page loads.
 
-      before_connect takes one argument, an instance of :py:class:`pycommunicate.proxies.context.CallCTX`. This CallCTX
+      before_connect takes one argument, an instance of :py:class:`~pycommunicate.proxies.context.CallCTX`. This CallCTX
       contains one function, ``abort``, which when called will interrupt the request and send back the error code passed
       to it.
 
@@ -42,7 +42,7 @@ Controller and ControllerFactory
 
 .. py:class:: Controller
 
-   The Controller class handles one url, or route. It contains multiple :py:class:`pycommunicate.server.bases.views.View`
+   The Controller class handles one url, or route. It contains multiple :py:class:`~pycommunicate.server.bases.views.View`
    and manages switching between them.
 
    .. warning::
@@ -51,7 +51,7 @@ Controller and ControllerFactory
 
    .. py:attribute:: route_data
 
-      This contains the values of the variable parts in the route. See :py:meth:`CommunicateApp.add_controller`
+      This contains the values of the variable parts in the route. See :py:meth:`~pycommunicate.server.app.communicate.CommunicateApp.add_controller`
       for more information on variable route parts.
 
    .. py:attribute:: d
@@ -61,7 +61,7 @@ Controller and ControllerFactory
 
    .. py:attribute:: user
 
-      An instance of :py:class:`pycommunicate.server.app.usertracker.User` of which this controller is currently servicing.
+      An instance of :py:class:`~pycommunicate.server.app.usertracker.User` of which this controller is currently servicing.
       Use its ``session`` attribute for proper sessions.
 
    .. py:attribute:: special_return_handler

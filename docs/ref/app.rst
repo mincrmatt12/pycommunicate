@@ -26,7 +26,7 @@ CommunicateApp
 
    .. py:method:: add_controller(route, controller)
 
-      Associates a :py:class:`pycommunicate.server.bases.controller.ControllerFactory` with a route.
+      Associates a :py:class:`~pycommunicate.server.bases.controller.ControllerFactory` with a route.
 
       .. warning::
 
@@ -43,7 +43,7 @@ CommunicateApp
 
    .. py:method:: add_error_handler(code, controller)
 
-      Associates a :py:class:`pycommunicate.server.bases.controller.ControllerFactory` with an HTTP error code
+      Associates a :py:class:`~pycommunicate.server.bases.controller.ControllerFactory` with an HTTP error code
 
       :param int code: The error code
       :param pycommunicate.server.bases.controller.ControllerFactory controller: The controller factory to associate the code with
