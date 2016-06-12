@@ -34,3 +34,9 @@ This is code from examples/hello.py found in the docs folder.
    tutorial/creatingone
    tutorial/sprinkling
 
+.. toctree::
+   :caption: Public API Reference
+   :maxdepth: 2
+
+   ref/app
+
