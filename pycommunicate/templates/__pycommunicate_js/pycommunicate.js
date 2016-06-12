@@ -128,6 +128,9 @@ window.pycommunicate = (function () {
                 var old = document.querySelector(selector);
                 old.parentNode.removeChild(old);
             });
+            socket.on('page.change', function (dat) {
+                location.href = dat[0]; 
+            });
         },
 
         _connect: function () {

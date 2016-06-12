@@ -1,7 +1,7 @@
-from flask import Flask, session
+from flask import Flask, session, abort, redirect
 
+from pycommunicate.proxies.context import CallCTX
 from pycommunicate.server.app.usertrack import UserTracker
-from pycommunicate.templating import Templater
 from .socketio import SocketIOContainer
 from eventlet.greenpool import GreenPool
 
@@ -44,7 +44,16 @@ class CommunicateApp:
 
         user.open_page(route, kwargs)
 
-        return user.active_controller.render_page()
+        ctx = CallCTX(abort=abort)
+        user.active_controller.before_connect(ctx)
+        ctx.deactivate()
+
+        possible = user.active_controller.render_page()
+
+        if user.active_controller.special_return_handler is not None:
+            return user.active_controller.special_return_handler()
+
+        return possible
 
     def _do_js_lib(self):
         user = None
@@ -60,17 +69,28 @@ class CommunicateApp:
                                                        request_id=user.request_id)
 
     def _create_flask_handler(self, route):
-        @self.flask.route(route)
         def handler(**kwargs):
             return self._dispatch(route, **kwargs)
+        name = 'handles' + str(len(self.routed_controllers))
+        self.flask.add_url_rule(route, name, handler)
 
     def add_controller(self, route, controller):
         if route.startswith("/__pycommunicate"):
             raise ValueError(
                 '''Routes cannot start with /__pycommunicate, as this is reserved for pycommunicate itself''')
+        self._add_controller(route, controller)
+
+    def _add_controller(self, route, controller):
         controller.route = route
         self.routed_controllers[route] = controller
         self._create_flask_handler(route)
+
+    def add_error_handler(self, code, controller):
+        @self.flask.errorhandler(code)
+        def handler(a):
+            return redirect("/__pycommunicate/error/{}".format(code))
+
+        self._add_controller("/__pycommunicate/error/{}".format(code), controller)
 
     def run(self):
         self.socketio.start_handlers(self.green_pool)

@@ -1,3 +1,5 @@
+from werkzeug.utils import redirect
+
 from pycommunicate.proxies.dom.html import HTMLWrapper
 from pycommunicate.proxies.socket import SocketInterface
 
@@ -18,6 +20,8 @@ class Controller:
         self.socket_interface = SocketInterface(self)
         self.html_wrapper = HTMLWrapper(self)
         self.templater = None
+        self.before_connect = factory.before_connect
+        self.special_return_handler = None
 
         self.events = {}
 
@@ -33,6 +37,15 @@ class Controller:
         self.view_index = new_view_index
         self.socket_interface.send('view.swap', self.render_page())
         self.user.socket_connected = False
+
+    def redirect(self, location):
+        # noinspection PyBroadException
+        try:
+            self.socket_interface.send('page.change', location)
+        except:
+            pass
+        self.special_return_handler = lambda: redirect(location)
+        return None
 
     def trigger_connect(self):
         self.current_view().load()
@@ -59,6 +72,7 @@ class ControllerFactory:
         self.view_types = []
         self.default_view_index = -1
         self.route = ""
+        self.before_connect = lambda x: None
 
     def add_view(self, view):
         """
@@ -69,6 +83,10 @@ class ControllerFactory:
 
     def set_default_view(self, view):
         self.default_view_index = self.view_types.index(view)
+        return self
+
+    def with_before_connect(self, before_connect):
+        self.before_connect = before_connect
         return self
 
     def __call__(self, *args, **kwargs):
