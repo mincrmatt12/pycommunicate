@@ -26,22 +26,27 @@ CommunicateApp
 
    .. py:method:: add_controller(route, controller)
 
-      Associates a :py:class:`Controller` with a route.
+      Associates a :py:class:`pycommunicate.server.bases.controller.ControllerFactory` with a route.
 
       .. warning::
 
          Any route starting with ``__pycommunicate/`` will not work, as this path is reserved for pycommunicate's
          internal routes.
 
-      :param str route: A route in the format of /page/subpage
-      :param Controller controller: The controller to associate with the route
+      .. tip::
+
+         Routes can contain variable parts, indicated like this: ``<name>`` where name is some name. You can also use
+         integers, for that use ``<int:name>``.
+
+      :param str route: The route
+      :param pycommunicate.server.bases.controller.ControllerFactory controller: The controller factory to associate with the route
 
    .. py:method:: add_error_handler(code, controller)
 
-      Associates a :py:class:`Controller` with an HTTP error code
+      Associates a :py:class:`pycommunicate.server.bases.controller.ControllerFactory` with an HTTP error code
 
       :param int code: The error code
-      :param Controller controller: The controller to associate the code with
+      :param pycommunicate.server.bases.controller.ControllerFactory controller: The controller factory to associate the code with
 
       .. versionadded:: 0.0.7
 
