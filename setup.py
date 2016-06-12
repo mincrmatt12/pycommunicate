@@ -22,7 +22,7 @@ wheel'''.splitlines()
 
 setup(
     name='pycommunicate',
-    version='0.0.6.post1',
+    version='0.0.6.post2',
     description='A web library focusing on handling JS events server-side',
     long_description=get_markdown(),
     url='https://github.com/mincrmatt12/pycommunicate',
