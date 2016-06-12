@@ -66,7 +66,7 @@ This defines our view, as all views are subclasses of View, from pycommunicate.s
 
 Next, we have the render() method. This is called to get the base page to serve when requested. It is the only
 thing you actually have to override. Views have references to their parent controllers, which have Templaters. A
-:py:class:`Templater` will render a template, the default location is templates/, but this can be changed. See :py:class:`CommunicateApp` for how to change it.
+:py:class:`Templater` will render a template, the default location is templates/, but this can be changed. See :py:class:`pycommunicate.server.app.communicate.CommunicateApp` for how to change it.
 
 .. note::
    The templater, and all of pycommunicate use jinja2, a templating engine. For more info on what we provide in jinja2, and
