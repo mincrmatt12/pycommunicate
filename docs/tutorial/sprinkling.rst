@@ -25,9 +25,10 @@ Alright, so now we have a variable called ``todo`` that manages... todos!
 Showing the current todos and removing them
 -------------------------------------------
 
-At the heart of server-side DOM manipulation in pycommunicate is :py:class:`HTMLWrapper`.
-For all of the methods it supports, go look at it, but the one we will be using is :py:meth:`element_by_selector`. This method
-will return a :py:class:`ElementWrapper` tracked to follow the selector given. This can then be used to modify the DOM.
+At the heart of server-side DOM manipulation in pycommunicate is :py:class:`~pycommunicate.proxies.dom.html.HTMLWrapper`.
+For all of the methods it supports, go look at it, but the one we will be using is :py:meth:`~pycommunicate.proxies.dom.html.HTMLWrapper.element_by_selector`.
+This method will return a :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper` tracked to follow the selector
+given. This can then be used to modify the DOM.
 
 Add a load() method
 ~~~~~~~~~~~~~~~~~~~

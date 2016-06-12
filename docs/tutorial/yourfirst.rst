@@ -1,4 +1,3 @@
-
 How pycommunicate works
 =======================
 
@@ -15,7 +14,7 @@ request
    A unique request for a controller.
 
 app
-   An instance of CommunicateApp. This is the main thing inside pycommunicate based webapps.
+   An instance of :py:class:`~pycommunicate.server.app.communicate.CommunicateApp`. This is the main thing inside pycommunicate based webapps.
 
 
 Now lets explain them in a bit more detail:
@@ -24,18 +23,19 @@ Controller
 ~~~~~~~~~~
 
 A controller is probably not what you think it is, as this does not follow MVC. Instead, controllers are used
-to hold many views, which actually deal with the page. Controller do, however, contain the controller session, which
-is one of many sessions in pycommunicate. This one remains across any given request.
+to hold many views, which actually deal with the page. :py:class:`~pycommunicate.server.bases.controller.Controller` instances are
+what controllers are. Controllers contain the controller session, which is one of many sessions in pycommunicate.
+This one remains across any given request.
 
-Controllers are not created by you, though. They are created by pycommunicate itself, you only define one. For this
-you use ControllerFactory. You can subclass both Controller and ControllerFactory to create your own custom behaviour,
-however.
+Controllers are not created by you, though. They are created by :py:class:`~pycommunicate.server.bases.controller.ControllerFactory`
+instances. You can subclass both :py:class:`~pycommunicate.server.bases.controller.Controller`
+and :py:class:`~pycommunicate.server.bases.controller.ControllerFactory` to create your own custom behaviour, however.
 
 View
 ~~~~
 
 Views probably contain the bulk of your code. They are responsible for serving up a page, handling events in a page, and
-much more. Because of this, views are subclassed from the base View class.
+much more. Because of this, views are subclassed from the base :py:class:`~pycommunicate.server.bases.views.View` class.
 
 
 OK, I promise in the next part we can start actually programming something!

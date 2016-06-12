@@ -10,7 +10,7 @@ Controller and ControllerFactory
 
    .. py:method:: add_view(view)
 
-      Adds a py:class:`~pycommunicate.server.bases.views.View` to the controller factory's view list.
+      Adds a :py:class:`~pycommunicate.server.bases.views.View` to the controller factory's view list.
 
       .. warning::
 
@@ -69,6 +69,10 @@ Controller and ControllerFactory
       If this is not None, then whatever this function returns will be sent directly to flask as the response. Use with caution.
 
       .. versionadded:: 0.0.7
+
+   .. py:attribute:: controller
+
+      An instance of :py:class:`~pycommunicate.templating.Templater`.
 
    .. py:method:: change_view(new_view_index)
 

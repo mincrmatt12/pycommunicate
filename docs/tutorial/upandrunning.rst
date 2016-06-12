@@ -1,8 +1,6 @@
 Getting up and running
 ======================
 
-.. contents:: Contents
-
 Installing pycommunicate
 ------------------------
 

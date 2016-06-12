@@ -8,7 +8,7 @@ The tutorial project will be quite simple:
 * will serve up a todo-file
 * will allow adding and removing of entries to it
 
-As you can see, this will be very simple, but using other libraries might require lots of ajax processing.
+As you can see, this is very simple, but using other libraries might require lots of ajax processing.
 In pycommunicate, none of this is needed!
 
 
@@ -17,8 +17,7 @@ Let's get started by making the simplest example: serving up a static page.
 Setting up our app
 ------------------
 Let's start by making an empty directory called tutorial somewhere on your system. Inside this directory should
-be one file and one folder: main.py and templates. We'll get back to templates in a second, but for now let's make
-main.py.
+be one file and one folder: main.py and templates.
 
 Making our page
 ---------------
@@ -62,15 +61,16 @@ Alright, let's break this down:
 
    class TodoView(View):
 
-This defines our view, as all views are subclasses of View, from pycommunicate.server.bases.views
+This defines our view, as all views are subclasses of :py:class:`~pycommunicate.server.bases.views.View`\ .
 
 Next, we have the render() method. This is called to get the base page to serve when requested. It is the only
-thing you actually have to override. Views have references to their parent controllers, which have Templaters. A
-:py:class:`pycommunicate.templating.Templater` will render a template, the default location is templates/, but this can be changed. See :py:class:`pycommunicate.server.app.communicate.CommunicateApp` for how to change it.
+thing you actually have to override. Views have references to their parent controllers, which have templaters. A
+:py:class:`pycommunicate.templating.Templater` can render templates from the file system, the default location is at
+templates/, but this can be changed. See :py:class:`pycommunicate.server.app.communicate.CommunicateApp` for how to change it.
 
 .. note::
-   The templater, and all of pycommunicate use jinja2, a templating engine. For more info on what we provide in jinja2, and
-   how to use the templater, go look at its page.
+   The templater, and all of pycommunicate use jinja2, a templating engine. For more info on what we provide in
+   jinja2, and how to use the templater, go look at its page.
 
 Anyways, now that we have a view, we should create a controller:
 
@@ -80,13 +80,18 @@ Anyways, now that we have a view, we should create a controller:
    controller = ControllerFactory().add_view(TodoView).set_default_view(TodoView)
    app.add_controller('/', controller)
 
-This one is pretty simple, we create a :py:class:`ControllerFactory` and call its methods (which are chainable) to add
-the TodoView view, and set it as the default (initial) one.
+This one is pretty simple, we create a :py:class:`~pycommunicate.server.bases.controller.ControllerFactory` and call its
+methods (which are chainable) to add the TodoView view, and set it as the default (initial) one.
 
 We're almost done, now, and all we have to add is the secret key and the call to run.
 
 .. danger::
+
    Remember, the secret key must be kept secret. For a truly random secret key, use os.urandom()
+
+.. note::
+
+   You need to include a secret key for pycommunicate to work.
 
 .. code-block:: python
    :linenos:
