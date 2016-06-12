@@ -10,7 +10,7 @@ Controller and ControllerFactory
 
    .. py:method:: add_view(view)
 
-      Adds a py:class:`pycommunicate.server.bases.views.View` to the controller factory's view list.
+      Adds a py:class:`View` to the controller factory's view list.
 
       .. warning::
 
@@ -42,7 +42,7 @@ Controller and ControllerFactory
 
 .. py:class:: Controller
 
-   The Controller class handles one url, or route. It contains multiple :py:class:`pycommunicate.server.bases.views.View`s
+   The Controller class handles one url, or route. It contains multiple :py:class:`pycommunicate.server.bases.views.View`
    and manages switching between them.
 
    .. warning::
@@ -51,7 +51,7 @@ Controller and ControllerFactory
 
    .. py:attribute:: route_data
 
-      This contains the values of the variable parts in the route. See :py:meth:`pycommunicate.server.app.communicate.CommunicateApp.add_controller`
+      This contains the values of the variable parts in the route. See :py:meth:`CommunicateApp.add_controller`
       for more information on variable route parts.
 
    .. py:attribute:: d
