@@ -178,7 +178,7 @@ Lines 5-11 are simply copied from the ``load()`` function, so look there for inf
 
 Again, I'll go line by line.
 
-.. code-block::
+.. code-block:: python
    :linenos:
 
    text = "- " + self.html_wrapper.element_by_selector("#next").get_property("value")
@@ -204,4 +204,4 @@ Your main.py file should now look like this:
 If it looks like that (give or take some whitespace or comments) then you're good to go! Simply run it and connect to it
 with the link in the console and watch your creation work!!
 
-This concludes the tutorial.
+This is the end of the tutorial, but I'm sure you could do other stuff with this if you want.
