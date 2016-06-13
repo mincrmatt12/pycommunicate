@@ -118,8 +118,9 @@ For each todo, get its text and store it in ``text``. Then, use the element crea
 to create and get a ``<div>`` element with id ``todo{index}`` inside the ``todo_div``. The next call is very similar, only
 calling it on ``todo_page_div`` and using it to create a ``<p>`` element with id ``todoText{index}`` instead.
 
-The :py:attr:`content` attribute is a wrapper for ``innerText``, which can be used to get or set the text of an element.
-We use this to change the text of the new ``<p>`` element to the text of the todo.
+The :py:attr:`~pycommunicate.proxies.dom.element.ElementWrapper.content` attribute is a wrapper for ``innerText``,
+which can be used to get or set the text of an element. We use this to change the text of the new ``<p>`` element to
+the text of the todo.
 
 .. warning::
    The get functions of element properties block until the property is received, while the set() functions return as soon as the
@@ -134,9 +135,9 @@ We use this to change the text of the new ``<p>`` element to the text of the tod
    button.add_event_listener("click", self.make_handler(index))
    button.content.set("Remove")
 
-Line 12 and 14 use already explained functions, so I'll detail the :py:meth:`add_event_listener` method instead. This method
+Line 12 and 14 use already explained functions, so I'll detail the :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.add_event_listener` method instead. This method
 will attach an event to a js event. These are using the chrome and firefox names, not the IE ones. We use it here to attach
-the button's click method to a dynamically generated event handler setup to destroy the todo server-side, and then use :py:meth:`ElementWrapper.delete`
+the button's click method to a dynamically generated event handler setup to destroy the todo server-side, and then use :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.delete`
 to remove it from the client-side.
 
 Adding todos
@@ -185,11 +186,11 @@ Again, I'll go line by line.
 
    text = "- " + self.html_wrapper.element_by_selector("#next").get_property("value")
 
-This will set text to "- " plus whatever is in the input field. The :py:meth:`get_property` method will return whatever
-the JS element defined by the :py:class:`ElementWrapper` has for that name. The ``value`` property contains the content
+This will set text to "- " plus whatever is in the input field. The :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.get_property` method will return whatever
+the JS element defined by the :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper` has for that name. The ``value`` property contains the content
 of the input field.
 
-Line 3 simply empties it using :py:meth:`set_property`.
+Line 3 simply empties it using :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.set_property`.
 
 Lines 2 and 4 use the :py:class:`TodoReader` to add and retrieve the index for the new entry, and the rest is just as above.
 
