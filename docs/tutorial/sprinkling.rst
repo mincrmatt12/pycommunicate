@@ -83,9 +83,10 @@ Alright, let's do this bit by bit:
    todo_div = self.html_wrapper.element_by_selector("#todo")
 
 The first part is probably self-explanatory to all python programmers, so let's explain that call. As I said earlier
-the :py:meth:`element_by_selector` method returns a :py:class:`ElementWrapper`. In this case, it is tracking the first thing with
-an id of ``todo``. In our html file, that points to the ``<div>``. So this call will set todo_div equal to something that represents...
-the todo div!
+the :py:meth:`~pycommunicate.proxies.dom.html.HTMLWrapper.element_by_selector` method returns a
+:py:class:`~pycommunicate.proxies.dom.element.ElementWrapper`. In this case, it is tracking the first thing with an id
+of ``todo``. In our html file, that points to the ``<div>``. So this call will set todo_div equal to something that
+represents... the todo div!
 
 .. code-block:: python
    :linenos:
@@ -113,7 +114,7 @@ so we loop through the keys, which are the indices.
 .. note::
    Although I could of used a list, this seemed easier to implement and keep track for removing entries, so I used a dictionary.
 
-For each todo, get its text and store it in ``text``. Then, use the element creation function :py:meth:`append_element_inside_self`
+For each todo, get its text and store it in ``text``. Then, use the element creation function :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.append_element_inside_self`
 to create and get a ``<div>`` element with id ``todo{index}`` inside the ``todo_div``. The next call is very similar, only
 calling it on ``todo_page_div`` and using it to create a ``<p>`` element with id ``todoText{index}`` instead.
 

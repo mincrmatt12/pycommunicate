@@ -69,5 +69,42 @@ HTMLWrapper and ElementWrapper
       :param object value: The value to set it to
       :return: None
 
+   .. py:method:: add_event_listener(event_name, handler)
 
+      Add an event handler for the given JS event. The names are in chrome/firefox format, not IE.
+      Some examples of events are ``click``, ``focus``, and ``blur``.
 
+      ``handler()`` takes no parameters.
+
+      :param str event_name: The JS name of the event
+      :param function handler: An event handler function
+
+   .. note::
+
+      The next two methods are probably going to be removed in a later release, but are still valid now.
+
+   .. py:method:: append_element_after_self(element_type, id)
+
+      Add a new element of type ``element_type`` with **unique** id ``id`` after this element, and return it.
+
+      :param str element_type: The type of the element, e.g. ``p`` or ``div``
+      :param str id: The id to assign to the element. Must be unique.
+      :return: The new element
+      :rtype: pycommunicate.proxies.dom.element.ElementWrapper
+
+   .. py:method:: append_element_inside_self(element_type, id)
+
+      Add a new element of type ``element_type`` with **unique** id ``id`` as a child of this element, and return it.
+
+      :param str element_type: The type of the element, e.g. ``p`` or ``div``
+      :param str id: The id to assign to the element. Must be unique.
+      :return: The new element
+      :rtype: pycommunicate.proxies.dom.element.ElementWrapper
+
+   .. py:method:: delete()
+
+      Delete this element.
+
+      .. warning::
+
+         After calling :py:meth:`~ElementWrapper.delete`, the instance should no longer be used.
