@@ -41,4 +41,5 @@ This is code from examples/hello.py found in the docs folder.
    ref/app
    ref/controller
    ref/dom
+   ref/user
 
