@@ -9,7 +9,7 @@ The tutorial project will be quite simple:
 * will allow adding and removing of entries to it
 
 As you can see, this is very simple, but using other libraries might require lots of ajax processing.
-In pycommunicate, none of this is needed!
+In pycommunicate, none of this is needed! All we use is some pretty simple python code--server-side!
 
 
 Let's get started by making the simplest example: serving up a static page.
@@ -31,7 +31,7 @@ with it. For now just put this into templates/home.html:
 Serving up the page statically
 ------------------------------
 
-First of all, we will need a :py:class:`pycommunicate.server.app.communicate.CommunicateApp` instance before we even start writing anything, so lets add that now to
+First of all, we will need a :py:class:`~pycommunicate.server.app.communicate.CommunicateApp` instance before we even start writing anything, so lets add that now to
 main.py, and while we're at it, lets import everything we'll need:
 
 .. code-block:: python
@@ -65,8 +65,8 @@ This defines our view, as all views are subclasses of :py:class:`~pycommunicate.
 
 Next, we have the render() method. This is called to get the base page to serve when requested. It is the only
 thing you actually have to override. Views have references to their parent controllers, which have templaters. A
-:py:class:`pycommunicate.templating.Templater` can render templates from the file system, the default location is at
-templates/, but this can be changed. See :py:class:`pycommunicate.server.app.communicate.CommunicateApp` for how to change it.
+:py:class:`~pycommunicate.templating.Templater` can render templates from the file system, the default location is at
+templates/, but this can be changed. See :py:class:`~pycommunicate.server.app.communicate.CommunicateApp` for how to change it.
 
 .. note::
    The templater, and all of pycommunicate use jinja2, a templating engine. For more info on what we provide in

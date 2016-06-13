@@ -17,4 +17,12 @@ class MultiElementProperty(object):
         self.element = element
         self.basename = basename
 
+    def __getitem__(self, item):
+        return self.element.dom.controller.socket_interface.request('element.property.complex', self.element.selector,
+                                                                    self.basename, item)
+
+    def __setitem__(self, key, value):
+        return self.element.dom.controller.socket_interface.send('element.property.complex.set', self.element.selector,
+                                                                 self.basename, key, value)
+
 
