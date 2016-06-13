@@ -108,3 +108,24 @@ HTMLWrapper and ElementWrapper
       .. warning::
 
          After calling :py:meth:`~ElementWrapper.delete`, the instance should no longer be used.
+
+   The following are properties with wrappers. These wrappers expose ``get()`` and ``set()``, which can be used to modify
+   the values. See :py:meth:`~ElementWrapper.get_property` and :py:meth:`~ElementWrapper.set_property` for more info on what
+   these do.
+
+   .. py:attribute:: content
+
+      Wrapper for ``innerText``
+
+   The following are properties that have more than one value. These use the following syntax (using
+   :py:attr:`~ElementWrapper.style` as an example)
+
+   .. code-block:: python
+
+      >>> my_element.style['marginTop']
+      '123px'
+      >>> my_element.style['marginTop'] = '456px'
+
+   .. py:attribute:: style
+
+      Wrapper for ``style``
