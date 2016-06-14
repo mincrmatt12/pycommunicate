@@ -37,6 +37,16 @@ HTMLWrapper and ElementWrapper
       .. versionchanged::
          Renamed to element.
 
+   .. py:method:: new(type)
+
+      Create and return a new :py:class:`pycommunicate.proxies.dom.element.ElementWrapper` tracking a new element of type
+      ``type``. The new API removes the need for a unique ID, as these are tracked internally instead.
+
+      :param str type: The element type.
+      :return: A new element wrapper.
+
+      .. versionadded:: 0.0.8
+
 
 .. py:module:: pycommunicate.proxies.dom.element
 
@@ -99,27 +109,37 @@ HTMLWrapper and ElementWrapper
       :param str event_name: The JS name of the event
       :param function handler: An event handler function
 
-   .. note::
+   .. py:method:: add_after(element_type)
 
-      The next two methods are probably going to be removed in a later release, but are still valid now.
-
-   .. py:method:: append_element_after_self(element_type, id)
-
-      Add a new element of type ``element_type`` with **unique** id ``id`` after this element, and return it.
+      Add a new element of type ``element_type`` after this element, and return it.
 
       :param str element_type: The type of the element, e.g. ``p`` or ``div``
-      :param str id: The id to assign to the element. Must be unique.
       :return: The new element
       :rtype: pycommunicate.proxies.dom.element.ElementWrapper
+      
+      .. versionchanged:: 0.0.8
+         Renamed to add_after and removed id parameter.
 
-   .. py:method:: append_element_inside_self(element_type, id)
+   .. py:method:: add_child(element_type)
 
-      Add a new element of type ``element_type`` with **unique** id ``id`` as a child of this element, and return it.
+      Add a new element of type ``element_type`` as a child of this element, and return it.
 
       :param str element_type: The type of the element, e.g. ``p`` or ``div``
-      :param str id: The id to assign to the element. Must be unique.
       :return: The new element
       :rtype: pycommunicate.proxies.dom.element.ElementWrapper
+      
+      .. versionchanged:: 0.0.8
+         Renamed to add_child and removed id parameter.
+         
+   .. py:method:: add_before(element_type)
+
+      Add a new element of type ``element_type`` before of this element, and return it.
+
+      :param str element_type: The type of the element, e.g. ``p`` or ``div``
+      :return: The new element
+      :rtype: pycommunicate.proxies.dom.element.ElementWrapper
+      
+      .. versionadded:: 0.0.8
 
    .. py:method:: delete()
 

@@ -88,10 +88,13 @@ class TodoView(View):
         self.html_wrapper.element("#next").set_property("value", "")
         index = todo.wait_on(text)
         todo_div = self.html_wrapper.element("#todo")
-        todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
-        text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
+        todo_page_div = todo_div.add_child("div")
+        todo_page_div.id = "todo{}".format(index)
+        text_p = todo_page_div.add_child("p")
+        text_p.id = "todoText{}".format(index)
         text_p.content = text
-        button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
+        button = todo_page_div.add_child("button")
+        button.id = "todo{}".format(index)
         button.add_event_listener("click", self.make_handler(index))
         button.content = "Remove"
 
@@ -104,10 +107,13 @@ class TodoView(View):
 
         for index in todo.todos:
             text = todo.todos[index]
-            todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
-            text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
+            todo_page_div = todo_div.add_child("div")
+            todo_page_div.id = "todo{}".format(index)
+            text_p = todo_page_div.add_child("p")
+            text_p.id = "todoText{}".format(index)
             text_p.content = text
-            button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
+            button = todo_page_div.add_child("button")
+            button.id = "todo{}".format(index)
             button.add_event_listener("click", self.make_handler(index))
             button.content = "Remove"
 

@@ -49,10 +49,13 @@ Let's create this method and add some code to it after the ``render()`` method:
 
        for index in todo.todos:
            text = todo.todos[index]
-           todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
-           text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
+           todo_page_div = todo_div.add_child("div")
+           todo_page_div.id = "todo{}".format(index)
+           text_p = todo_page_div.add_child("p")
+           text_p.id = "todoText{}".format(index)
            text_p.content = text
-           button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
+           button = todo_page_div.add_child("button")
+           button.id = "todo{}".format(index)
            button.add_event_listener("click", self.make_handler(index))
            button.content = "Remove"
 
@@ -104,8 +107,10 @@ which deletes the element. This effectively clears the "Loading..." message from
 
    for index in todo.todos:
        text = todo.todos[index]
-       todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
-       text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
+       todo_page_div = todo_div.add_child("div")
+       todo_page_div.id = "todo{}".format(index)
+       text_p = todo_page_div.add_child("p")
+       text_p.id = "todoText{}".format(index)
        text_p.content = text
 
 So the loop goes through every todo in the :py:class:`TodoReader`. This class uses ids and a dictionary to store todos,
@@ -114,7 +119,7 @@ so we loop through the keys, which are the indices.
 .. note::
    Although I could of used a list, this seemed easier to implement and keep track for removing entries, so I used a dictionary.
 
-For each todo, get its text and store it in ``text``. Then, use the element creation function :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.append_element_inside_self`
+For each todo, get its text and store it in ``text``. Then, use the element creation function :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.add_child`
 to create and get a ``<div>`` element with id ``todo{index}`` inside the ``todo_div``. The next call is very similar, only
 calling it on ``todo_page_div`` and using it to create a ``<p>`` element with id ``todoText{index}`` instead.
 
@@ -131,7 +136,8 @@ the text of the todo.
    :linenos:
    :lineno-start: 12
 
-   button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
+   button = todo_page_div.add_child("button")
+   button.id = "todo{}".format(index)
    button.add_event_listener("click", self.make_handler(index))
    button.content = "Remove"
 
@@ -170,10 +176,13 @@ Here's the code in it:
    self.html_wrapper.element("#next").set_property("value", "")
    index = todo.wait_on(text)
    todo_div = self.html_wrapper.element("#todo")
-   todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
-   text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
+   todo_page_div = todo_div.add_child("div")
+   todo_page_div.id = "todo{}".format(index)
+   text_p = todo_page_div.add_child("p")
+   text_p.id = "todoText{}".format(index)
    text_p.content = text
-   button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
+   button = todo_page_div.add_child("button")
+   button.id = "todo{}".format(index)
    button.add_event_listener("click", self.make_handler(index))
    button.content = "Remove"
 

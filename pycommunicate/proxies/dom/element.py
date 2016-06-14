@@ -4,10 +4,12 @@ from pycommunicate.util import random_alphanumeric_string
 
 class ElementWrapper(object):
     content = DescriptorElementProperty("innerText")
+    value = DescriptorElementProperty("value")
+    id = DescriptorElementProperty("id")
 
     def __init__(self, html_wrapper, selector):
         self.dom = html_wrapper
-        self.selector = selector
+        self.selector = self.dom.controller.socket_interface.request('element.selector', selector)
         self.style = MultiElementProperty('style', self)
 
     def prop(self, name, value=None):
@@ -33,13 +35,17 @@ class ElementWrapper(object):
         self.dom.controller.handle_event(event_id, handler)
         self.dom.controller.socket_interface.send('element.addevent', self.selector, event_name, event_id)
 
-    def append_element_after_self(self, element_type, id):
-        self.dom.controller.socket_interface.request('element.add.after', self.selector, element_type.upper(), id)
-        return ElementWrapper(self.dom, "{}#{}".format(element_type.lower(), id))
+    def add_child(self, kind):
+        new_selector = self.dom.controller.socket_interface.request('element.add.inside', self.selector, kind)
+        return ElementWrapper(self.dom, new_selector)
 
-    def append_element_inside_self(self, element_type, id):
-        self.dom.controller.socket_interface.request('element.add.inside', self.selector, element_type.upper(), id)
-        return ElementWrapper(self.dom, "{}#{}".format(element_type.lower(), id))
+    def add_after(self, kind):
+        new_selector = self.dom.controller.socket_interface.request('element.add.after', self.selector, kind)
+        return ElementWrapper(self.dom, new_selector)
+
+    def add_before(self, kind):
+        new_selector = self.dom.controller.socket_interface.request('element.add.before', self.selector, kind)
+        return ElementWrapper(self.dom, new_selector)
 
     def delete(self):
         self.dom.controller.socket_interface.send('element.remove', self.selector)
