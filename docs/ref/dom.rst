@@ -37,16 +37,6 @@ HTMLWrapper and ElementWrapper
       .. versionchanged::
          Renamed to element.
 
-   .. py:method:: new(type)
-
-      Create and return a new :py:class:`pycommunicate.proxies.dom.element.ElementWrapper` tracking a new element of type
-      ``type``. The new API removes the need for a unique ID, as these are tracked internally instead.
-
-      :param str type: The element type.
-      :return: A new element wrapper.
-
-      .. versionadded:: 0.0.8
-
 
 .. py:module:: pycommunicate.proxies.dom.element
 
@@ -116,7 +106,7 @@ HTMLWrapper and ElementWrapper
       :param str element_type: The type of the element, e.g. ``p`` or ``div``
       :return: The new element
       :rtype: pycommunicate.proxies.dom.element.ElementWrapper
-      
+
       .. versionchanged:: 0.0.8
          Renamed to add_after and removed id parameter.
 
@@ -127,10 +117,10 @@ HTMLWrapper and ElementWrapper
       :param str element_type: The type of the element, e.g. ``p`` or ``div``
       :return: The new element
       :rtype: pycommunicate.proxies.dom.element.ElementWrapper
-      
+
       .. versionchanged:: 0.0.8
          Renamed to add_child and removed id parameter.
-         
+
    .. py:method:: add_before(element_type)
 
       Add a new element of type ``element_type`` before of this element, and return it.
@@ -138,7 +128,7 @@ HTMLWrapper and ElementWrapper
       :param str element_type: The type of the element, e.g. ``p`` or ``div``
       :return: The new element
       :rtype: pycommunicate.proxies.dom.element.ElementWrapper
-      
+
       .. versionadded:: 0.0.8
 
    .. py:method:: delete()
