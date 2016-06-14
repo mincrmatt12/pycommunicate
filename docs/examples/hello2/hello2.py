@@ -9,9 +9,9 @@ class HelloView(View):
 
     def load(self):
         print "requesting whether p exists...",
-        print self.html_wrapper.element_exists('p')
+        print self.html_wrapper.exists('p')
         print "requesting whether li exists...",
-        print self.html_wrapper.element_exists('li')
+        print self.html_wrapper.exists('li')
 
 
 app = CommunicateApp()

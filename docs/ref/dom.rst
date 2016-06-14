@@ -13,7 +13,7 @@ HTMLWrapper and ElementWrapper
 
    Every controller and view has one, and these are not created by the user.
 
-   .. py:method:: element_exists(selector)
+   .. py:method:: exists(selector)
 
       Ask the browser whether an element matching the given selector exists.
       This method will block.
@@ -22,14 +22,21 @@ HTMLWrapper and ElementWrapper
       :return: Whether or not the target element exists
       :rtype: bool
 
-   .. py:method:: element_by_selector(selector)
+      .. versionchanged:: 0.0.8
+         Renamed to exists.
 
-      First call :py:meth:`~HTMLWrapper.element_exists` and if it returns True return an :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper`
+   .. py:method:: element(selector)
+
+      First call :py:meth:`~HTMLWrapper.exists` and if it returns True return an :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper`
       instance tracking the element defined by selector. Otherwise return None
 
       :param str selector: The selector for the element
       :return: An :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper` instance tracking the given selector or None if none is found.
       :rtype: pycommunicate.proxies.dom.element.ElementWrapper
+
+      .. versionchanged::
+         Renamed to element.
+
 
 .. py:module:: pycommunicate.proxies.dom.element
 
@@ -38,6 +45,19 @@ HTMLWrapper and ElementWrapper
    This class tracks an element by selector, and provides many utility functions and properties for it.
 
    These are created by :py:class:`~pycommunicate.proxies.dom.html.HTMLWrapper` and should not be created manually.
+
+   .. py:method:: prop(name, value=None)
+
+      Wrapper around :py:meth:`~ElementWrapper.get_property()` and :py:meth:`~ElementWrapper.set_property()`. This is
+      part of the new chainable API.
+
+      Calling this without value or with value set to None will result in getting the property and returning its value.
+      Calling this with a value will set the property to value, and return the element. You can chain calls in this way.
+
+      :param str name: The name of the property to get/set
+      :param object name: The value to set to, if None do a get.
+
+      .. versionadded:: 0.0.8
 
    .. py:method:: get_property(property_name)
 
@@ -109,9 +129,10 @@ HTMLWrapper and ElementWrapper
 
          After calling :py:meth:`~ElementWrapper.delete`, the instance should no longer be used.
 
-   The following are properties with wrappers. These wrappers expose ``get()`` and ``set()``, which can be used to modify
-   the values. See :py:meth:`~ElementWrapper.get_property` and :py:meth:`~ElementWrapper.set_property` for more info on what
-   these do.
+   The following are wrappers for properties. They are actually descriptors, so you can just use them.
+
+   .. versionchanged:: 0.0.8
+      Removed old ``get()`` and ``set()`` api
 
    .. py:attribute:: content
 

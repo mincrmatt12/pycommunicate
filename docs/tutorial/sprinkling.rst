@@ -26,7 +26,7 @@ Showing the current todos and removing them
 -------------------------------------------
 
 At the heart of server-side DOM manipulation in pycommunicate is :py:class:`~pycommunicate.proxies.dom.html.HTMLWrapper`.
-For all of the methods it supports, go look at it, but the one we will be using is :py:meth:`~pycommunicate.proxies.dom.html.HTMLWrapper.element_by_selector`.
+For all of the methods it supports, go look at it, but the one we will be using is :py:meth:`~pycommunicate.proxies.dom.html.HTMLWrapper.element`.
 This method will return a :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper` tracked to follow the selector
 given. This can then be used to modify the DOM.
 
@@ -42,19 +42,19 @@ Let's create this method and add some code to it after the ``render()`` method:
    :linenos:
 
    def load(self):
-       todo_div = self.html_wrapper.element_by_selector("#todo")
+       todo_div = self.html_wrapper.element("#todo")
 
-       loading_message = self.html_wrapper.element_by_selector("#loadingBar")
+       loading_message = self.html_wrapper.element("#loadingBar")
        loading_message.delete()
 
        for index in todo.todos:
            text = todo.todos[index]
            todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
            text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
-           text_p.content.set(text)
+           text_p.content = text
            button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
            button.add_event_listener("click", self.make_handler(index))
-           button.content.set("Remove")
+           button.content = "Remove"
 
 After doing this, if you are using an IDE, it will complain about self.make_handler not existing, so make that too:
 
@@ -65,7 +65,7 @@ After doing this, if you are using an IDE, it will complain about self.make_hand
         def handler():
             todo.remove(index)
 
-            todo_div = self.html_wrapper.element_by_selector("#todo{}".format(index))
+            todo_div = self.html_wrapper.element("#todo{}".format(index))
             todo_div.delete()
         return handler
 
@@ -80,10 +80,10 @@ Alright, let's do this bit by bit:
    :linenos:
    :lineno-start: 2
 
-   todo_div = self.html_wrapper.element_by_selector("#todo")
+   todo_div = self.html_wrapper.element("#todo")
 
 The first part is probably self-explanatory to all python programmers, so let's explain that call. As I said earlier
-the :py:meth:`~pycommunicate.proxies.dom.html.HTMLWrapper.element_by_selector` method returns a
+the :py:meth:`~pycommunicate.proxies.dom.html.HTMLWrapper.element` method returns a
 :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper`. In this case, it is tracking the first thing with an id
 of ``todo``. In our html file, that points to the ``<div>``. So this call will set todo_div equal to something that
 represents... the todo div!
@@ -92,7 +92,7 @@ represents... the todo div!
    :linenos:
    :lineno-start: 4
 
-   loading_message = self.html_wrapper.element_by_selector("#loadingBar")
+   loading_message = self.html_wrapper.element("#loadingBar")
    loading_message.delete()
 
 The first line does similar things to the example above, so lets explain the second line. It calls ``loading_message``'s :py:meth:`delete` method,
@@ -106,7 +106,7 @@ which deletes the element. This effectively clears the "Loading..." message from
        text = todo.todos[index]
        todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
        text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
-       text_p.content.set(text)
+       text_p.content = text
 
 So the loop goes through every todo in the :py:class:`TodoReader`. This class uses ids and a dictionary to store todos,
 so we loop through the keys, which are the indices.
@@ -133,7 +133,7 @@ the text of the todo.
 
    button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
    button.add_event_listener("click", self.make_handler(index))
-   button.content.set("Remove")
+   button.content = "Remove"
 
 Line 12 and 14 use already explained functions, so I'll detail the :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.add_event_listener` method instead. This method
 will attach an event to a js event. These are using the chrome and firefox names, not the IE ones. We use it here to attach
@@ -151,7 +151,7 @@ To do this, you need to add the following lines at the end of ``load()``:
 .. code-block:: python
    :linenos:
 
-   add_button = self.html_wrapper.element_by_selector("#add")
+   add_button = self.html_wrapper.element("#add")
    add_button.add_event_listener("click", self.add_handler)
 
 I've already explained above what this does, so let's go create that add_handler event handler.
@@ -165,17 +165,17 @@ Here's the code in it:
 .. code-block:: python
    :linenos:
 
-   text = "- " + self.html_wrapper.element_by_selector("#next").get_property("value")
+   text = "- " + self.html_wrapper.element("#next").get_property("value")
    todo.add(text)
-   self.html_wrapper.element_by_selector("#next").set_property("value", "")
+   self.html_wrapper.element("#next").set_property("value", "")
    index = todo.wait_on(text)
-   todo_div = self.html_wrapper.element_by_selector("#todo")
+   todo_div = self.html_wrapper.element("#todo")
    todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
    text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
-   text_p.content.set(text)
+   text_p.content = text
    button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
    button.add_event_listener("click", self.make_handler(index))
-   button.content.set("Remove")
+   button.content = "Remove"
 
 Lines 5-11 are simply copied from the ``load()`` function, so look there for info on what these do.
 
@@ -184,7 +184,7 @@ Again, I'll go line by line.
 .. code-block:: python
    :linenos:
 
-   text = "- " + self.html_wrapper.element_by_selector("#next").get_property("value")
+   text = "- " + self.html_wrapper.element("#next").get_property("value")
 
 This will set text to "- " plus whatever is in the input field. The :py:meth:`~pycommunicate.proxies.dom.element.ElementWrapper.get_property` method will return whatever
 the JS element defined by the :py:class:`~pycommunicate.proxies.dom.element.ElementWrapper` has for that name. The ``value`` property contains the content

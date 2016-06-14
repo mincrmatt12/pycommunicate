@@ -39,6 +39,8 @@ Controller and ControllerFactory
 
       :param function before_connect: The before_connect function. See above for signature
 
+      .. versionadded:: 0.0.7
+
 
 .. py:class:: Controller
 

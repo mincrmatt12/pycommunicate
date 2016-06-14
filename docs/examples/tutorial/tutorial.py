@@ -78,40 +78,40 @@ class TodoView(View):
         def handler():
             todo.remove(index)
 
-            todo_div = self.html_wrapper.element_by_selector("#todo{}".format(index))
+            todo_div = self.html_wrapper.element("#todo{}".format(index))
             todo_div.delete()
         return handler
 
     def add_handler(self):
-        text = "- " + self.html_wrapper.element_by_selector("#next").get_property("value")
+        text = "- " + self.html_wrapper.element("#next").get_property("value")
         todo.add(text)
-        self.html_wrapper.element_by_selector("#next").set_property("value", "")
+        self.html_wrapper.element("#next").set_property("value", "")
         index = todo.wait_on(text)
-        todo_div = self.html_wrapper.element_by_selector("#todo")
+        todo_div = self.html_wrapper.element("#todo")
         todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
         text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
-        text_p.content.set(text)
+        text_p.content = text
         button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
         button.add_event_listener("click", self.make_handler(index))
-        button.content.set("Remove")
+        button.content = "Remove"
 
     def load(self):
         # add existing todos:
-        todo_div = self.html_wrapper.element_by_selector("#todo")
+        todo_div = self.html_wrapper.element("#todo")
 
-        loading_message = self.html_wrapper.element_by_selector("#loadingBar")
+        loading_message = self.html_wrapper.element("#loadingBar")
         loading_message.delete()
 
         for index in todo.todos:
             text = todo.todos[index]
             todo_page_div = todo_div.append_element_inside_self("div", "todo{}".format(index))
             text_p = todo_page_div.append_element_inside_self("p", "todoText{}".format(index))
-            text_p.content.set(text)
+            text_p.content = text
             button = todo_page_div.append_element_inside_self("button", "todoRemove{}".format(index))
             button.add_event_listener("click", self.make_handler(index))
-            button.content.set("Remove")
+            button.content = "Remove"
 
-        add_button = self.html_wrapper.element_by_selector("#add")
+        add_button = self.html_wrapper.element("#add")
         add_button.add_event_listener("click", self.add_handler)
 
 controller = ControllerFactory().add_view(TodoView).set_default_view(TodoView)

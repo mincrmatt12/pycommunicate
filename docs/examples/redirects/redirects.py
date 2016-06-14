@@ -16,7 +16,7 @@ class LandingView2(View):
 
     def load(self):
         print 'test'
-        self.controller.html_wrapper.element_by_selector(
+        self.controller.html_wrapper.element(
             '#redirect').add_event_listener('click',
                                             lambda: self.controller.redirect(
                                                 '/land3'))
@@ -25,6 +25,7 @@ class LandingView2(View):
 class LandingView3(View):
     def render(self):
         return 'Landing view 3'
+
 
 first_controller = ControllerFactory().add_view(LandingView1).set_default_view(LandingView1)
 second_controller = ControllerFactory().add_view(LandingView2).set_default_view(LandingView2)

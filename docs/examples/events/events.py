@@ -8,18 +8,18 @@ class EventView(View):
         return self.controller.templater.render("page.html")
 
     def load(self):
-        self.html_wrapper.element_by_selector('button#pushme').add_event_listener('click', self.button_pushed)
+        self.html_wrapper.element('button#pushme').add_event_listener('click', self.button_pushed)
 
     def button_pushed(self):
-        self.html_wrapper.element_by_selector('p.change').content.set('I have changed, from the server-side!!')
-        self.html_wrapper.element_by_selector('p#time').content.set('0')
+        self.html_wrapper.element('p.change').content = 'I have changed, from the server-side!!'
+        self.html_wrapper.element('p#time').content = '0'
         self.add_timer(1, self.timer)
 
     def timer(self):
-        time = int(self.html_wrapper.element_by_selector('p#time').content.get())
+        time = int(self.html_wrapper.element('p#time').content)
         time += 1
 
-        self.html_wrapper.element_by_selector('p#time').content.set('{}'.format(time))
+        self.html_wrapper.element('p#time').content = '{}'.format(time)
 
 app = CommunicateApp()
 controller = ControllerFactory().add_view(EventView).set_default_view(EventView)

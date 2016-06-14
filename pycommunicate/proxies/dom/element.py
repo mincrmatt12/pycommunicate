@@ -1,13 +1,21 @@
-from pycommunicate.proxies.dom.property import SimpleElementProperty, MultiElementProperty
+from pycommunicate.proxies.dom.property import SimpleElementProperty, MultiElementProperty, DescriptorElementProperty
 from pycommunicate.util import random_alphanumeric_string
 
 
-class ElementWrapper:
+class ElementWrapper(object):
+    content = DescriptorElementProperty("innerText")
+
     def __init__(self, html_wrapper, selector):
         self.dom = html_wrapper
         self.selector = selector
-        self.content = SimpleElementProperty('innerText', self)  # TODO: Wrap more elements without set and get
         self.style = MultiElementProperty('style', self)
+
+    def prop(self, name, value=None):
+        if value is None:
+            return self.get_property(name)
+        else:
+            self.set_property(name, value)
+            return self
 
     def set_property(self, property_name, value):
         self.dom.controller.socket_interface.send('element.property.set', self.selector, property_name,
