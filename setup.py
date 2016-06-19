@@ -19,10 +19,19 @@ six
 Werkzeug
 wheel'''.splitlines()
 
+with open('build.version', 'r') as build_version:
+    dat = build_version.read().strip("\n").split(" ")
+
+v = ""
+
+if dat[3] == "master" or dat[2] == "<v>":
+    v = dat[1]
+else:
+    v = dat[1] + "+" + dat[2]
 
 setup(
     name='pycommunicate',
-    version='0.0.7',
+    version=v,
     description='A web library focusing on handling JS events server-side',
     long_description=get_markdown(),
     url='https://github.com/mincrmatt12/pycommunicate',
