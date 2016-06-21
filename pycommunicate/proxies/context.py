@@ -1,14 +1,12 @@
-class CallCTX:
-    def __init__(self, **exposed):
-        self.__stuff = exposed
-        self.__active = True
+class ContextAwareFunctionWrapper(object):
+    def __init__(self):
+        self.create_function = None
+        self.functions = {}
 
-    def use(self, name):
-        if self.__active:
-            return self.__stuff[name]
+    def __get__(self, instance, owner):
+        if instance in self.functions:
+            return self.functions[instance]
+        else:
+            self.functions[instance] = self.create_function(instance)
+            return self.functions[instance]
 
-        return None
-
-    def deactivate(self):
-        self.__stuff = {}
-        self.__active = False

@@ -8,7 +8,7 @@ def get_markdown():
 
 requires = '''click
 eventlet
-Flask
+flask
 Flask-SocketIO
 itsdangerous
 Jinja2
