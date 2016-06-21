@@ -5,7 +5,6 @@ class View:
     def __init__(self, controller):
         self.controller = controller
         self.html_wrapper = controller.html_wrapper
-        self.ctx =
         self.timers = []
 
     def add_timer(self, time, function):
