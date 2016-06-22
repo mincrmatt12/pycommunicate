@@ -1,6 +1,4 @@
 from flask import Flask, session, abort, redirect
-
-from pycommunicate.proxies.context import CallCTX
 from pycommunicate.server.app.usertrack import UserTracker
 from .socketio import SocketIOContainer
 from eventlet.greenpool import GreenPool
@@ -44,9 +42,7 @@ class CommunicateApp:
 
         user.open_page(route, kwargs)
 
-        ctx = CallCTX(abort=abort)
-        user.active_controller.before_connect(ctx)
-        ctx.deactivate()
+        user.active_controller.before_connect()
 
         possible = user.active_controller.render_page()
 

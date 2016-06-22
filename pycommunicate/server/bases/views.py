@@ -2,6 +2,7 @@ import eventlet
 
 
 class View:
+
     def __init__(self, controller):
         self.controller = controller
         self.html_wrapper = controller.html_wrapper
@@ -21,6 +22,7 @@ class View:
         self.timers[timer].kill()
 
     def teardown(self):
+        print inspect.stack()
         for timer in self.timers:
             timer.kill()
 
