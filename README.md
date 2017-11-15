@@ -1,3 +1,7 @@
+# NOTE:
+This project (right now) is unmaintained. It is pretty much a demo of what could happen with something like this. A version two is in the works, but not really.
+
+
 # pycommunicate
 pycommunicate is a library that wraps flask and flask-socketio to provide you with a really cool thing.
 
